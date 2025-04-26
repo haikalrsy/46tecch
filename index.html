@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>46Tech - Welcome</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 50%, #321b4a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(167, 66, 245, 0.3);
+            pointer-events: none;
+        }
+
+        .landing-container {
+            text-align: center;
+            z-index: 2;
+            padding: 2rem;
+            max-width: 100%;
+            position: relative;
+        }
+
+        .logo-container {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #a742f5 0%, #f045dd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+
+        .logo-tagline {
+            font-size: 1.2rem;
+            color: #b8b8b8;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards 0.8s;
+        }
+
+        .logo-icon {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 2rem;
+            position: relative;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: scaleIn 1.2s ease forwards 0.2s;
+        }
+
+        .logo-hexagon {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #a742f5 0%, #f045dd 100%);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            animation: rotate 10s linear infinite;
+            opacity: 0.8;
+        }
+
+        .logo-inner {
+            position: absolute;
+            width: 85%;
+            height: 85%;
+            top: 7.5%;
+            left: 7.5%;
+            background: rgba(26, 26, 46, 0.9);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+        }
+
+        .logo-inner span {
+            background: linear-gradient(90deg, #a742f5 0%, #f045dd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .enter-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: white;
+            background: linear-gradient(90deg, #a742f5 0%, #f045dd 100%);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(167, 66, 245, 0.3);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards 1.1s;
+            text-decoration: none;
+        }
+
+        .enter-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(167, 66, 245, 0.5);
+            letter-spacing: 3px;
+        }
+
+        .enter-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: all 0.6s ease;
+        }
+
+        .enter-button:hover::before {
+            transform: translateX(100%);
+        }
+
+        .enter-button i {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .enter-button:hover i {
+            transform: translateX(5px);
+        }
+
+        .animated-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(167, 66, 245, 0.2), rgba(240, 69, 221, 0.1));
+            filter: blur(20px);
+            animation: float 10s infinite ease-in-out;
+            opacity: 0;
+        }
+
+        .shape1 {
+            width: 400px;
+            height: 400px;
+            top: -10%;
+            right: -5%;
+            animation-delay: 0s;
+            animation-name: fadeIn, float1;
+        }
+
+        .shape2 {
+            width: 300px;
+            height: 300px;
+            bottom: -10%;
+            left: -5%;
+            animation-delay: 0.3s;
+            animation-name: fadeIn, float2;
+        }
+
+        .shape3 {
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            left: 10%;
+            animation-delay: 0.6s;
+            animation-name: fadeIn, float3;
+        }
+
+        .shape4 {
+            width: 250px;
+            height: 250px;
+            bottom: 20%;
+            right: 10%;
+            animation-delay: 0.9s;
+            animation-name: fadeIn, float4;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes float1 {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            50% {
+                transform: translate(-30px, 30px) rotate(8deg);
+            }
+        }
+
+        @keyframes float2 {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            50% {
+                transform: translate(40px, -40px) rotate(-8deg);
+            }
+        }
+
+        @keyframes float3 {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            50% {
+                transform: translate(30px, 30px) rotate(5deg);
+            }
+        }
+
+        @keyframes float4 {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            50% {
+                transform: translate(-40px, -20px) rotate(-5deg);
+            }
+        }
+
+        /* Loading animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0f0f0f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+
+        .loading-spinner::before,
+        .loading-spinner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            border-top-color: #a742f5;
+            animation: spin 1.5s linear infinite;
+        }
+
+        .loading-spinner::after {
+            border-top-color: #f045dd;
+            animation: spin 1s linear infinite reverse;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .logo {
+                font-size: 3.5rem;
+            }
+
+            .logo-icon {
+                width: 120px;
+                height: 120px;
+            }
+
+            .floating-shape {
+                opacity: 0.3;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Background Shapes -->
+    <div class="animated-bg">
+        <div class="floating-shape shape1"></div>
+        <div class="floating-shape shape2"></div>
+        <div class="floating-shape shape3"></div>
+        <div class="floating-shape shape4"></div>
+    </div>
+
+    <!-- Particles Container -->
+    <div class="particles-container"></div>
+
+    <!-- Main Content -->
+    <div class="landing-container">
+        <div class="logo-container">
+            <div class="logo-icon">
+                <div class="logo-hexagon"></div>
+                <div class="logo-inner">
+                    <span>46</span>
+                </div>
+            </div>
+            <h1 class="logo">46Tech</h1>
+            <p class="logo-tagline">Discover the future of technology</p>
+        </div>
+        
+        <a href="testing.html" class="enter-button">
+            Next Page <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Create particles
+            createParticles();
+            
+            // Hide loading overlay
+            setTimeout(function() {
+                $('.loading-overlay').css({
+                    'opacity': '0',
+                    'visibility': 'hidden'
+                });
+            }, 1500);
+            
+            // Button hover effect
+            $('.enter-button').hover(
+                function() {
+                    $(this).find('i').css('transform', 'translateX(5px)');
+                },
+                function() {
+                    $(this).find('i').css('transform', 'translateX(0)');
+                }
+            );
+            
+            // Animate shapes
+            setTimeout(function() {
+                $('.floating-shape').css('opacity', '1');
+            }, 300);
+            
+            // Button click animation
+            $('.enter-button').click(function(e) {
+                e.preventDefault();
+                var href = $(this).attr('href');
+                
+                $('<div class="loading-overlay" style="opacity: 0;"></div>')
+                    .appendTo('body')
+                    .animate({ opacity: 1 }, 300, function() {
+                        window.location.href = href;
+                    });
+            });
+        });
+        
+        // Create particle effect
+        function createParticles() {
+            const container = $('.particles-container');
+            const particleCount = 100;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const size = Math.random() * 3 + 1;
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                const duration = Math.random() * 20 + 10;
+                const delay = Math.random() * 5;
+                
+                const particle = $('<div class="particle"></div>');
+                
+                particle.css({
+                    'width': size + 'px',
+                    'height': size + 'px',
+                    'left': x + '%',
+                    'top': y + '%',
+                    'opacity': Math.random() * 0.5 + 0.1,
+                    'animation': `float${Math.floor(Math.random() * 4) + 1} ${duration}s infinite alternate ${delay}s`
+                });
+                
+                container.append(particle);
+            }
+        }
+    </script>
+</body>
+</html>
